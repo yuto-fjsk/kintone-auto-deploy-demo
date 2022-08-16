@@ -47,7 +47,7 @@ function getManifestFilePaths() {
     });
     console.log(manifestFilePaths);
 
-    return manifestFilePaths;
+    return new Set(manifestFilePaths);
 }
 
 /**
@@ -64,8 +64,8 @@ function findCustomizeManifestFilePath(dirName) {
     const customizeManifestFileNames = fileNames.filter(fileName => {
         const filePath = path.join(dirName, fileName);
         console.debug('filePath', filePath);
-        // TODO devとprodを環境変数で切り替える
-        return fs.statSync(filePath).isFile() && /customize-manifest\.json$/.test(filePath);
+        const customizeManifestFileReg = new RegExp(`customize-manifest-${process.env.ENV}\.json$`)
+        return fs.statSync(filePath).isFile() && customizeManifestFileReg.test(filePath);
     });
     // customize-manifestが見つかるとファイルパスを返す
     if (customizeManifestFileNames.length > 0) {
