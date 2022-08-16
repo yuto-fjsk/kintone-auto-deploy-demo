@@ -1,7 +1,7 @@
 name: Kintone Deploy
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/* ]
 env:
   KINTONE_BASE_URL: ${{secrets.KINTONE_BASE_URL}}
   KINTONE_PASSWORD: ${{secrets.KINTONE_PASSWORD}}
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v25
@@ -22,11 +22,12 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #    node-version: '16'
-      #   #  cache: 'npm'
-      # - run: npm install
-      # # - run: npm run deploy
-      # - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+         node-version: '16'
+        #  cache: 'npm'
+      - run: npm install
+      - name: Deploy kintone apps
+        run: |
+          npm run deploy -- ${{steps.changed-files.outputs.all_changed_files}}
