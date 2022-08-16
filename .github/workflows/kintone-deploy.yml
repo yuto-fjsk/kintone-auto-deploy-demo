@@ -1,0 +1,41 @@
+name: Kintone Deploy
+on:
+  push:
+    branches: [ main, feature/* ]
+env:
+  KINTONE_BASE_URL: ${{secrets.KINTONE_BASE_URL}}
+  KINTONE_PASSWORD: ${{secrets.KINTONE_PASSWORD}}
+  KINTONE_USER: ${{secrets.KINTONE_USER}}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: For dev environment
+        if: contains(toJSON(env.GITHUB_REF_NAME), 'feature')
+        run: |
+          echo ENV=dev >> $GITHUB_ENV
+      - name: For prod environment
+        if: contains(toJSON(env.GITHUB_REF_NAME), 'main')
+        run: |
+          echo ENV=prod >> $GITHUB_ENV
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v25
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+         node-version: '16'
+        #  cache: 'npm'
+      - run: npm install
+      - name: Deploy kintone apps
+        run: |
+          npm run deploy -- ${{steps.changed-files.outputs.all_changed_files}}

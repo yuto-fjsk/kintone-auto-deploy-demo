@@ -1,0 +1,14 @@
+{
+    "app": "388",
+    "scope": "ALL",
+    "desktop": {
+        "js": [
+            "kintone/apps/見積もり管理/src/index.js"
+        ],
+        "css": []
+    },
+    "mobile": {
+        "js": [],
+        "css": []
+    }
+}

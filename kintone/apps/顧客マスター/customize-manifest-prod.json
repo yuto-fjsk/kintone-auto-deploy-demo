@@ -1,0 +1,14 @@
+{
+    "app": "387",
+    "scope": "ALL",
+    "desktop": {
+        "js": [
+            "kintone/apps/顧客マスター/src/index.js"
+        ],
+        "css": []
+    },
+    "mobile": {
+        "js": [],
+        "css": []
+    }
+}
