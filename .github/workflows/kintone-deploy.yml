@@ -15,11 +15,11 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set dev environment
-        if: ${{contains(toJSON(github.ref), 'feature')}}
+        if: ${{contains(env.GITHUB_REF_NAME, 'feature')}}
         run: |
           echo ENV=dev >> $GITHUB_ENV
       - name: Set prod environment
-        if: ${{contains(toJSON(github.ref), 'main')}}
+        if: ${{contains(env.GITHUB_REF_NAME, 'main')}}
         run: |
           echo ENV=prod >> $GITHUB_ENV
       - name: Get changed files
