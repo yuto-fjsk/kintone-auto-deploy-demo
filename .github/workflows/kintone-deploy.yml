@@ -14,12 +14,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: For dev environment
-        if: contains(toJSON(env.GITHUB_REF_NAME), 'feature')
+      - name: Set dev environment
+        if: ${{contains(toJSON(env.GITHUB_REF_NAME), 'feature')}}
         run: |
           echo ENV=dev >> $GITHUB_ENV
-      - name: For prod environment
-        if: contains(toJSON(env.GITHUB_REF_NAME), 'main')
+      - name: Set prod environment
+        if: ${{contains(toJSON(env.GITHUB_REF_NAME), 'main')}}
         run: |
           echo ENV=prod >> $GITHUB_ENV
       - name: Get changed files
