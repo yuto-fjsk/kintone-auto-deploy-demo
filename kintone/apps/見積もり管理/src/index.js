@@ -21,7 +21,7 @@
             myListHeaderDiv.style.fontSize = '30px';
             myListHeaderDiv.style.fontWeight = 'bold';
             myListHeaderDiv.style.backgroundColor = '#ffd78c';
-            myListHeaderDiv.innerText = '押されて飛び出てじゃじゃじゃじゃじゃーん';
+            myListHeaderDiv.innerText = '飛び出てじゃじゃじゃじゃじゃーん';
 
             // メニューの下側の空白部分に文字列を表示
             myHeaderSpace.innerText = ''; // 増殖を防ぐため一旦明治的に空文字をセット
