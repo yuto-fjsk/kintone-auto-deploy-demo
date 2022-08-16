@@ -3,7 +3,7 @@
     "scope": "ALL",
     "desktop": {
         "js": [
-            "src/index.js"
+            "kintone/apps/見積もり管理/src/index.js"
         ],
         "css": []
     },

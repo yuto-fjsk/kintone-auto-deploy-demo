@@ -3,7 +3,7 @@
     "scope": "ALL",
     "desktop": {
         "js": [
-            "src/index.js"
+            "kintone/apps/顧客マスター/src/index.js"
         ],
         "css": []
     },
