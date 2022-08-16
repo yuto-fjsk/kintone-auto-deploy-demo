@@ -4,6 +4,7 @@ const {execSync} = require('child_process');
 
 const SEARCH_DIR = 'kintone/apps' // このディレクトリ配下でcustomize-manifest.jsonファイルを探す
 const COMMAND = `npx kintone-customize-uploader --base-url ${process.env.KINTONE_BASE_URL} --username ${process.env.KINTONE_USER} --password ${process.env.KINTONE_PASSWORD} `;
+console.log('env', process.env);
 
 // 変更があったパスに含まれるcustomize-manifestファイルの一覧を取得
 const manifestFilePaths = getManifestFilePaths();
